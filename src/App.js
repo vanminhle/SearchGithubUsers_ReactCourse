@@ -12,7 +12,7 @@ function App() {
         <Route path="/login">
           <Login></Login>
         </Route>
-        <Route path="*" exact>
+        <Route path="*">
           <Error></Error>
         </Route>
       </Switch>
