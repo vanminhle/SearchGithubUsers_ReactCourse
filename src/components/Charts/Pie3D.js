@@ -1,7 +1,56 @@
+// STEP 1 - Include Dependencies
+// Include react
 import React from 'react';
 
-const Pie3D = () => {
-  return <div>chart</div>;
+// Include the react-fusioncharts component
+import ReactFC from 'react-fusioncharts';
+
+// Include the fusioncharts library
+import FusionCharts from 'fusioncharts';
+
+// Include the chart type
+import Chart from 'fusioncharts/fusioncharts.charts';
+
+// Include the theme as fusion
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+
+// Adding the chart and theme as dependency to the core fusioncharts
+ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
+
+const ChartComponent = ({ data }) => {
+  // STEP 3 - Creating the JSON object to store the chart configurations
+  const chartConfigs = {
+    type: 'pie3d', // The chart type
+    width: '400', // Width of the chart
+    height: '400', // Height of the chart
+    dataFormat: 'json', // Data type
+    dataSource: {
+      // Chart Configuration
+      chart: {
+        //Set the chart caption
+        caption: 'Language',
+        //Set the theme for your chart
+        theme: 'fusion',
+        decimals: 0,
+        pieRadius: '45%',
+        //Color of pie, should at least 10 color or skip this property
+        // paletteColors: '#f0db4f,#f83d22,#f98a33',
+      },
+      // Chart Data
+      data,
+    },
+  };
+
+  return <ReactFC {...chartConfigs} />;
 };
 
-export default Pie3D;
+export default ChartComponent;
+
+// // STEP 4 - Creating the DOM element to pass the react-fusioncharts component
+// class App extends React.Component {
+//   render() {
+//     return <ReactFC {...chartConfigs} />;
+//   }
+// }
+
+// export default App;
