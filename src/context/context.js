@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+//LOCAL DATA, BECAUSE GITHUB LIMIT REQUEST PER HOURS
 import mockUser from './mockData.js/mockUser';
 import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';
@@ -11,8 +12,14 @@ const GithubContext = React.createContext();
 //Provider, Consumer - GithubContext.Provide
 
 const GithubProvider = ({ children }) => {
+  const [githubUser, setGithubUser] = useState(mockUser);
+  const [repos, setRepos] = useState(mockRepos);
+  const [followers, setFollowers] = useState(mockFollowers);
+
   return (
-    <GithubContext.Provider value={'hello'}>{children}</GithubContext.Provider>
+    <GithubContext.Provider value={{ githubUser, repos, followers }}>
+      {children}
+    </GithubContext.Provider>
   );
 };
 
