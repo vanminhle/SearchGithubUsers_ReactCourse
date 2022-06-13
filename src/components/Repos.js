@@ -7,7 +7,29 @@ const Repos = () => {
   const { repos } = React.useContext(GithubContext);
   console.log(repos);
 
-  return <ExampleChart />;
+  // STEP 2 - Chart Data
+  const chartData = [
+    {
+      label: 'HTML',
+      value: '15',
+    },
+    {
+      label: 'CSS',
+      value: '23',
+    },
+    {
+      label: 'Javascript',
+      value: '30',
+    },
+  ];
+
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        <ExampleChart dataProp={chartData} />
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`
