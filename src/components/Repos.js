@@ -42,7 +42,7 @@ const Repos = () => {
     })
     .slice(0, 5);
 
-  console.log(languages);
+  //console.log(languages);
 
   //stars, forks
   let { stars, forks } = repos.reduce(
@@ -58,10 +58,10 @@ const Repos = () => {
     }
   );
 
-  console.log(stars, forks);
-
   stars = Object.values(stars).slice(-5).reverse();
   forks = Object.values(forks).slice(-5).reverse();
+
+  //console.log(stars, forks);
 
   // STEP 2 - Chart Data
   const chartData = [
