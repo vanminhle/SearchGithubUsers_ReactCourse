@@ -10,7 +10,7 @@ const Repos = () => {
   let languages = repos.reduce((total, item) => {
     const { language, stargazers_count } = item;
     if (!language) return total; //if language == null, then not get it
-    console.log(language);
+    //console.log(language);
 
     if (!total[language]) {
       total[language] = { label: language, value: 1, stars: stargazers_count };
@@ -25,12 +25,14 @@ const Repos = () => {
     return total;
   }, {});
 
+  //pie, most used languages
   const mostUsed = Object.values(languages) //convert to array and get only 5 data highest
     .sort((a, b) => {
       return b.value - a.value;
     })
     .slice(0, 5);
 
+  //donut, most poplular languages
   const mostPopular = Object.values(languages)
     .sort((a, b) => {
       return b.stars - a.stars;
@@ -41,6 +43,25 @@ const Repos = () => {
     .slice(0, 5);
 
   console.log(languages);
+
+  //stars, forks
+  let { stars, forks } = repos.reduce(
+    (total, item) => {
+      const { stargazers_count, name, forks } = item;
+      total.stars[stargazers_count] = { label: name, value: stargazers_count };
+      total.forks[forks] = { label: name, value: forks };
+      return total;
+    },
+    {
+      stars: {},
+      forks: {},
+    }
+  );
+
+  console.log(stars, forks);
+
+  stars = Object.values(stars).slice(-5).reverse();
+  forks = Object.values(forks).slice(-5).reverse();
 
   // STEP 2 - Chart Data
   const chartData = [
@@ -62,9 +83,9 @@ const Repos = () => {
     <section className="section">
       <Wrapper className="section-center">
         <Pie3D data={mostUsed} />
-        <Column3D data={chartData} />
+        <Column3D data={stars} />
         <Doughnut2D data={mostPopular} />
-        <Bar3D data={chartData} />
+        <Bar3D data={forks} />
 
         {/* <ExampleChart dataProp={chartData} /> */}
       </Wrapper>
