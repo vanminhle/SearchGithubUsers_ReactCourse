@@ -5,7 +5,7 @@ import { GithubContext } from '../context/context';
 
 const Search = () => {
   const [user, setUser] = React.useState('');
-  const { requests, error } = React.useContext(GithubContext);
+  const { requests, error, searchGithubUser } = React.useContext(GithubContext);
 
   //console.log(requests);
 
@@ -13,7 +13,7 @@ const Search = () => {
     e.preventDefault();
     console.log(user);
     if (user) {
-      //More logic comming
+      searchGithubUser(user);
       setUser('');
     }
   };
